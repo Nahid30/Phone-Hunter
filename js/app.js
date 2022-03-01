@@ -25,7 +25,6 @@ const searchPhone = () => {
 }
     }
 
-
 // display result and create card dynamically by using for of loop
 
 const displaySearchResult = datas =>{
@@ -33,7 +32,6 @@ const displaySearchResult = datas =>{
 
     // clear previous result before display new result
     searchResult.textContent = '';
-
     
     for(const data of datas){
         
@@ -64,7 +62,6 @@ const seeDetails = slug =>{
     .then(res => res.json())
     .then(data => displaySeeDetails(data.data));
 }
-
 // display single card result & created dynamically 
 
 const displaySeeDetails = details =>{
@@ -76,22 +73,30 @@ const displaySeeDetails = details =>{
     div.innerHTML = `
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="${details.image}" class="img-fluid rounded-start mt-4 pt-4 ms-2 " alt="...">
+            <img src="${details.image}" class="img-fluid w-100 rounded-start mt-3 my-1" alt="...">
+            <div class='ms-2 mt-4 pt-4'>
+                <h3 class="card-title text-danger">${details.name}</h3>
+                <p class="card-text text-secondary">${details.releaseDate}</p>
+                <p class="card-text text-secondary">Id : ${details.slug}</p>
+            </div>
         </div>
+
       <div class="col-md-8">
         <div class="card-body">
-            <h5 class="card-title text-danger">${details.name}</h5>
-            <p class="card-text text-secondary">${details.releaseDate}</p>
-            <p class="card-text text-secondary">Id : ${details.slug}</p>
-            <h6 class="card-text text-primary"> Main Features : </h6>
-            <h6> Chip Set : <span class="text-info"> ${details.mainFeatures.chipSet} </span> </h6>
-            <h6> Display Size : <span class="text-info"> ${details.mainFeatures.displaySize} </span> </h6>
-            <h6> Memory : <span class="text-info"> ${details.mainFeatures.memory} </span> </h6>
+            <h5 class="card-text text-primary"> Main Features : </h5>
+            <p class="text-secondary">1. Chip Set : ${details.mainFeatures.chipSet}</p>
+            <p class="text-secondary">2. Display Size : ${details.mainFeatures.displaySize}</p>
+            <p class="text-secondary">3. Memory : ${details.mainFeatures.memory}</p>
 
-            <h6 class="card-text text-success mt-3"> Others : </h6>
-            <h6> Bluetooth : <span class="text-info"> ${details.others.Bluetooth} </span> </h6>
-            <h6> GPS : <span class="text-info"> ${details.others.GPS} </span> </h6>
-            <h6> WLAN : <span class="text-info"> ${details.others.WLAN} </span> </h6>
+            <h5 class="card-text text-primary"> Sensors : </h5>
+            <p class="text-secondary">1. ${details.mainFeatures.sensors[0]}</p>
+            <p class="text-secondary">2. ${details.mainFeatures.sensors[1]}</p>
+            <p class="text-secondary">3. ${details.mainFeatures.sensors[2]}</p>
+            
+            <h5 class="card-text text-success mt-3"> Others : </h5>
+            <p class="text-secondary">1. Bluetooth : ${details.others.Bluetooth}</p>
+            <p class="text-secondary">2. GPS : ${details.others.GPS} </p>
+            <p class="text-secondary">3. WLAN : ${details.others.WLAN} </p>
         </div>
       </div>
     </div>
