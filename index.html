@@ -15,7 +15,7 @@
 
     <!-- search box & button  -->
     <div class="input-group mb-3 mt-4 w-50 mx-auto ">
-        <input id="search-field" type="text" class="form-control text-center" placeholder="Search Your Phone" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input id="search-field" type="text" class="form-control " placeholder="Search Your Phone" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button onclick="searchPhone()" class="btn btn-outline-success ms-2" type="button" id="search-button">Search</button>
     </div>
 
@@ -33,6 +33,10 @@
 
     </div>
 
+    <!-- error text message  -->
+    <div id="error">
+        <p class="text-danger text-center mt-3">No Result Found</p>
+    </div>
   
 
     <script src="js/bootstrap.bundle.min.js"></script>

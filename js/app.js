@@ -1,3 +1,5 @@
+// error messager id call display none 
+const error = document.getElementById('error').style.display = 'none';
 
 // call search button and get input field 
 const searchPhone = () => {
@@ -5,21 +7,36 @@ const searchPhone = () => {
     const searchInputText = searchInput.value;
     searchInput.value = '';
 
-// get API link and fetch 
+    // get error text id and throw error message by if else
+    const error = document.getElementById('error').style.display = 'block'
+    if(searchInputText == ''){
+        const errorText = error.innerText;
+        console.log(errorText);
+        error.innerText = '';
+        
+    }
+    else{
+    // get API link and fetch 
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchInputText}`;
     
     fetch(url)
     .then(res => res.json())
     .then(data => displaySearchResult(data.data));
 }
+    }
+
 
 // display result and create card dynamically by using for of loop
 
 const displaySearchResult = datas =>{
     const searchResult = document.getElementById('search-result');
 
+    // clear previous result before display new result
+    searchResult.textContent = '';
+
+    
     for(const data of datas){
-        // console.log(data);
+        
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -37,8 +54,10 @@ const displaySearchResult = datas =>{
     }
 }
 
+// get API link and fetch for display single card/data 
+
 const seeDetails = slug =>{
-    // console.log(slug);
+    
     const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
     
     fetch(url)
@@ -46,9 +65,12 @@ const seeDetails = slug =>{
     .then(data => displaySeeDetails(data.data));
 }
 
+// display single card result & created dynamically 
+
 const displaySeeDetails = details =>{
     console.log(details);
     const singleSeeDetails = document.getElementById('single-seeDetails');
+    singleSeeDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
@@ -65,6 +87,11 @@ const displaySeeDetails = details =>{
             <h6> Chip Set : <span class="text-info"> ${details.mainFeatures.chipSet} </span> </h6>
             <h6> Display Size : <span class="text-info"> ${details.mainFeatures.displaySize} </span> </h6>
             <h6> Memory : <span class="text-info"> ${details.mainFeatures.memory} </span> </h6>
+
+            <h6 class="card-text text-success mt-3"> Others : </h6>
+            <h6> Bluetooth : <span class="text-info"> ${details.others.Bluetooth} </span> </h6>
+            <h6> GPS : <span class="text-info"> ${details.others.GPS} </span> </h6>
+            <h6> WLAN : <span class="text-info"> ${details.others.WLAN} </span> </h6>
         </div>
       </div>
     </div>
