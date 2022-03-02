@@ -1,41 +1,41 @@
 
-const error = document.getElementById('error');
+// globally call error div by its id 
+    const error = document.getElementById('error');
+
 
 // call search button and get input field 
-const searchPhone = () => {
+    const searchPhone = () => {
     const searchInput = document.getElementById('search-field');
     const searchInputText = searchInput.value;
-    // searchInput.value = '';
+    
 
-    // get error text id and throw error message by if else
+// get error text id and throw error message by if else
     
     if(searchInput.value == ''){
         error.textContent='';
-        // error.classList.remove('d-none')
         const div = document.createElement('div');
         const h5 = document.createElement('h5');
         h5.innerText = 'Please Write Something';
         div.appendChild(h5);
         error.appendChild(div);
-        
-        
+         
     }
     else{
     // get API link and fetch 
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchInputText}`;
-    
+
     fetch(url)
     .then(res => res.json())
     .then(data => displaySearchResult(data.data));
-}
     }
+}
 
 // display result and create card dynamically by using for of loop
 
-const displaySearchResult = datas =>{
+    const displaySearchResult = datas =>{
     const searchResult = document.getElementById('search-result');
     if(datas.length == 0){
-        // error.classList.remove('d-none');
+        // error message 
         error.textContent = '';
         const div = document.createElement('div');
         const h5 = document.createElement('h5');
@@ -55,7 +55,7 @@ const displaySearchResult = datas =>{
         div.innerHTML = `
         <div class="card h-100 m-4 bg-light rounded text-center">
             <div class='text-center'> 
-            <img src="${data.image}" class="img-fluid pt-4 w-50" alt="...">
+                <img src="${data.image}" class="img-fluid pt-4 w-50" alt="...">
             </div>
             
             <div class="card-body">
@@ -67,7 +67,7 @@ const displaySearchResult = datas =>{
         `;
         searchResult.appendChild(div);
 
-    }
+        }
     }
     
 }
@@ -85,10 +85,7 @@ const seeDetails = slug =>{
 // display single card result & created dynamically 
 
 const displaySeeDetails = details =>{
-    // console.log(details.mainFeatures.sensors);
-    // for(const sensor of details.mainFeatures.sensors){
-    //     console.log(sensor);
-    // }
+    
     const singleSeeDetails = document.getElementById('single-seeDetails');
     singleSeeDetails.textContent = '';
     const div = document.createElement('div');
