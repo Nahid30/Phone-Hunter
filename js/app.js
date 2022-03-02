@@ -90,6 +90,8 @@ const displaySeeDetails = details =>{
     singleSeeDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
+
+    // Show details card create dynamically 
     div.innerHTML = `
     <div class="row g-0">
         <div class="col-md-4">
