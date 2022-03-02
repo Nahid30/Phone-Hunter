@@ -1,18 +1,23 @@
-// error messager id call display none 
-const error = document.getElementById('error').style.display = 'none';
+
+const error = document.getElementById('error');
 
 // call search button and get input field 
 const searchPhone = () => {
     const searchInput = document.getElementById('search-field');
     const searchInputText = searchInput.value;
-    searchInput.value = '';
+    // searchInput.value = '';
 
     // get error text id and throw error message by if else
-    const error = document.getElementById('error').style.display = 'block'
-    if(searchInputText == ''){
-        const errorText = error.innerText;
-        console.log(errorText);
-        error.innerText = '';
+    
+    if(searchInput.value == ''){
+        error.textContent='';
+        // error.classList.remove('d-none')
+        const div = document.createElement('div');
+        const h5 = document.createElement('h5');
+        h5.innerText = 'Please Write Something';
+        div.appendChild(h5);
+        error.appendChild(div);
+        
         
     }
     else{
@@ -29,17 +34,30 @@ const searchPhone = () => {
 
 const displaySearchResult = datas =>{
     const searchResult = document.getElementById('search-result');
+    if(datas.length == 0){
+        // error.classList.remove('d-none');
+        error.textContent = '';
+        const div = document.createElement('div');
+        const h5 = document.createElement('h5');
+        h5.innerText = 'Please Write Mobile Name! ';
+        div.appendChild(h5);
+        error.appendChild(div);
+    }
+    else{
 
     // clear previous result before display new result
     searchResult.textContent = '';
     
     for(const data of datas){
-        
+    
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card h-100 m-4 bg-light rounded ">
-            <img src="${data.image}" class="card-img-top ps-2 pt-4 w-50" alt="...">
+        <div class="card h-100 m-4 bg-light rounded text-center">
+            <div class='text-center'> 
+            <img src="${data.image}" class="img-fluid pt-4 w-50" alt="...">
+            </div>
+            
             <div class="card-body">
                 <h5 class="card-title text-danger">${data.phone_name}</h5>
                 <p class="card-text">${data.brand}</p>
@@ -50,6 +68,8 @@ const displaySearchResult = datas =>{
         searchResult.appendChild(div);
 
     }
+    }
+    
 }
 
 // get API link and fetch for display single card/data 
@@ -65,7 +85,10 @@ const seeDetails = slug =>{
 // display single card result & created dynamically 
 
 const displaySeeDetails = details =>{
-    console.log(details);
+    // console.log(details.mainFeatures.sensors);
+    // for(const sensor of details.mainFeatures.sensors){
+    //     console.log(sensor);
+    // }
     const singleSeeDetails = document.getElementById('single-seeDetails');
     singleSeeDetails.textContent = '';
     const div = document.createElement('div');
@@ -76,7 +99,9 @@ const displaySeeDetails = details =>{
             <img src="${details.image}" class="img-fluid w-100 rounded-start mt-3 my-1" alt="...">
             <div class='ms-2 mt-4 pt-4'>
                 <h3 class="card-title text-danger">${details.name}</h3>
-                <p class="card-text text-secondary">${details.releaseDate}</p>
+
+                <p class="card-text text-secondary">${details.releaseDate?details.releaseDate:"This Phone has no release Date"}</p>
+
                 <p class="card-text text-secondary">Id : ${details.slug}</p>
             </div>
         </div>
